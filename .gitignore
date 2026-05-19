@@ -1,0 +1,20 @@
+# User secrets
+.env
+config.txt
+
+# Runtime files
+logs/*
+!logs/.gitkeep
+state/*
+!state/.gitkeep
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Build outputs
+build/
+dist/
+release/
+*.spec
+*.zip

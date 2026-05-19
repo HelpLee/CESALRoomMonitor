@@ -1,0 +1,47 @@
+name: Build Windows EXE
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build-windows-exe:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Build exe with PyInstaller
+        run: |
+          pyinstaller --noconfirm --clean --onefile --name CESALRoomMonitor check_cesal_rooms.py
+
+      - name: Prepare portable release folder
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force release/CESALRoomMonitor_Windows_NoPython | Out-Null
+          New-Item -ItemType Directory -Force release/CESALRoomMonitor_Windows_NoPython/logs | Out-Null
+          New-Item -ItemType Directory -Force release/CESALRoomMonitor_Windows_NoPython/state | Out-Null
+          Copy-Item dist/CESALRoomMonitor.exe release/CESALRoomMonitor_Windows_NoPython/
+          Copy-Item config.example.txt release/CESALRoomMonitor_Windows_NoPython/
+          Copy-Item README_FIRST_USE.txt release/CESALRoomMonitor_Windows_NoPython/
+          Copy-Item LICENSE release/CESALRoomMonitor_Windows_NoPython/ -ErrorAction SilentlyContinue
+          Compress-Archive -Path release/CESALRoomMonitor_Windows_NoPython/* -DestinationPath release/CESALRoomMonitor_Windows_NoPython.zip -Force
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CESALRoomMonitor_Windows_NoPython
+          path: release/CESALRoomMonitor_Windows_NoPython.zip

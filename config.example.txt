@@ -1,0 +1,19 @@
+# CESAL Room Monitor - simple configuration
+# 只需要改下面两项：租期结束日期 + Telegram Bot Token。
+
+# 你希望查询的租期结束日期，格式必须是 日/月/年
+CESAL_END_DATE=19/06/2027
+
+# Telegram BotFather 给你的 token，格式类似：123456789:AAxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+TELEGRAM_BOT_TOKEN=PASTE_YOUR_TELEGRAM_BOT_TOKEN_HERE
+
+# 检测间隔区间。程序会在 6 到 12 分钟之间随机选择下一次检查时间。
+# 不建议低于 5 分钟，避免过于频繁访问网站。
+CHECK_INTERVAL_MINUTES_MIN=6
+CHECK_INTERVAL_MINUTES_MAX=12
+
+# 以下一般不用改：程序会自动发现 chat_id。
+# 使用前请先在 Telegram 里给机器人发送 /start，然后发送 test123。
+TELEGRAM_CHAT_ID=
+TELEGRAM_AUTO_DISCOVER_CHAT_ID=true
+ENABLE_TELEGRAM=true
