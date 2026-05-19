@@ -8,6 +8,59 @@ A lightweight Windows portable tool for monitoring the CESAL resident housing re
 
 ---
 
+## Which option should you choose?
+
+There are two different ways to use this project.
+
+### Option A: I only want to use the program
+
+Use the Windows portable release.
+
+You do not need to install Python, Anaconda, pip, or any Python package.
+
+Go to:
+
+```text
+Releases -> latest version -> Assets
+```
+
+Download:
+
+```text
+CESALRoomMonitor_v1.0.0.zip
+```
+
+Extract it, then read the file inside the zip:
+
+```text
+README_FIRST_USE.txt
+```
+
+That file explains how to configure `config.txt`, how to get a Telegram bot token, how to send `/start` and `test123`, and how to run `CESALRoomMonitor.exe`.
+
+This is the recommended option for normal users.
+
+### Option B: I want to build or modify the project myself
+
+Use the source code in this repository.
+
+This option is for developers or users who want to:
+
+- modify the Python script;
+- change the build workflow;
+- build a new exe with GitHub Actions;
+- publish a new GitHub Release;
+- run the source code directly with Python.
+
+For this option, read the later sections:
+
+- Repository structure
+- Build the Windows executable with GitHub Actions
+- Publish a GitHub Release
+- Local development
+
+---
+
 ## What this project does
 
 - Opens the CESAL resident area with Microsoft Edge.
@@ -24,7 +77,7 @@ A lightweight Windows portable tool for monitoring the CESAL resident housing re
 
 ---
 
-## Recommended way to use: Windows portable release
+## Direct use: Windows portable release
 
 For normal users, the recommended way is to download the Windows portable version from GitHub Releases.
 
@@ -70,9 +123,30 @@ CESALRoomMonitor_v1.0.0/
 └── state/
 ```
 
+### Read the package guide first
+
+The release zip includes:
+
+```text
+README_FIRST_USE.txt
+```
+
+This is the user guide for the packaged executable. Read it before running the program.
+
+In short:
+
+1. Copy `config.example.txt`.
+2. Rename the copy to `config.txt`.
+3. Fill in `TELEGRAM_BOT_TOKEN`.
+4. Confirm or edit `CESAL_END_DATE`.
+5. Send `/start` and `test123` to your Telegram bot.
+6. Double-click `CESALRoomMonitor.exe`.
+
 ---
 
-## First-time configuration
+## First-time configuration summary
+
+The full first-use guide is in `README_FIRST_USE.txt` inside the release zip. The following is only a summary.
 
 ### Step 1: Create `config.txt`
 
@@ -125,62 +199,42 @@ Do not set the interval too short. A value lower than 5 minutes is not recommend
 
 ---
 
-## How to get a Telegram bot token
+## Telegram bot setup summary
+
+The full Telegram setup guide is in `README_FIRST_USE.txt` inside the release zip.
 
 1. Open Telegram.
 2. Search for `@BotFather`.
-3. Open the chat with BotFather.
-4. Send:
+3. Send:
 
 ```text
 /newbot
 ```
 
-5. Follow the instructions.
-6. BotFather will ask you to set a display name and a username.
-7. The bot username must end with `bot`, for example:
-
-```text
-cesal_room_alert_abc_bot
-```
-
-8. After the bot is created, BotFather will send you a token similar to:
-
-```text
-123456789:AAxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-```
-
-9. Copy that token into `config.txt`:
+4. Follow the instructions.
+5. Copy the token returned by BotFather.
+6. Paste it into `config.txt`:
 
 ```text
 TELEGRAM_BOT_TOKEN=123456789:AAxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
-Important: the Telegram bot token is private. Do not upload `config.txt` to GitHub and do not share your real token.
-
----
-
-## Wake up the Telegram bot
-
 Before running the program, open your Telegram bot chat and send:
 
 ```text
 /start
-```
-
-Then send:
-
-```text
 test123
 ```
 
-This is necessary because a Telegram bot cannot send messages to you until you have started a chat with it.
+It is recommended to send `test123` again before running the monitor each day.
 
-It is recommended to send `test123` again before running the monitor each day. This helps the program discover your latest Telegram chat ID automatically.
+Important: the Telegram bot token is private. Do not upload `config.txt` to GitHub and do not share your real token.
 
 ---
 
-## Run the program
+## Running summary
+
+The full running guide is in `README_FIRST_USE.txt`.
 
 Inside the `CESALRoomMonitor_v1.0.0` folder, double-click:
 
@@ -188,50 +242,11 @@ Inside the `CESALRoomMonitor_v1.0.0` folder, double-click:
 CESALRoomMonitor.exe
 ```
 
-A black command window will open first. Microsoft Edge will open automatically after the program finishes initialization.
+The first run may take about 30 seconds to 1 minute before the Edge browser appears.
 
-### First run may be slow
+If CESAL asks you to log in, log in manually in the opened Microsoft Edge browser. After the CESAL resident page is visible, return to the black command window and press `Enter` to continue.
 
-The first run may take about 30 seconds to 1 minute before the Edge browser appears. Please wait patiently and do not double-click the program repeatedly.
-
-If several program windows are opened at the same time, close the extra windows and keep only one instance running.
-
-### Manual CESAL login
-
-If CESAL asks you to log in:
-
-1. Go to the opened Microsoft Edge browser.
-2. Log in to your CESAL resident account manually.
-3. If Edge asks whether to save the password, you may choose to save or remember the password on your own trusted computer.
-4. Wait until the CESAL resident homepage or resident area is fully visible.
-5. Return to the black command window.
-6. Press `Enter` to continue.
-
-### How the program knows login is complete
-
-The program does not read your password and does not automatically submit login credentials.
-
-When it detects the CESAL login page, it pauses and waits for you. After you manually log in, you confirm completion by pressing `Enter` in the black command window. Then the program opens the reservation page again.
-
-If it is still on the login page, the program will ask you to log in again.
-
-### Login time limit
-
-There is no short program-side countdown while the program is waiting at the login prompt. In normal use, you can take several minutes to enter the username, password, and any verification required by CESAL.
-
-However, the CESAL website itself may have its own session timeout or login timeout. If the website expires the login page, refresh or log in again, then return to the command window and press `Enter` after the resident page is visible.
-
----
-
-## How to stop
-
-In the black command window, press:
-
-```text
-Ctrl + C
-```
-
-Then confirm if the terminal asks you to stop the program.
+The program does not read your password and does not automatically submit login credentials. It waits for you to complete the login manually.
 
 ---
 
@@ -267,6 +282,8 @@ CESALRoomMonitor_v1.0.0/
 
 ## Build the Windows executable with GitHub Actions
 
+This section is only needed if you want to build the program yourself.
+
 This repository includes a GitHub Actions workflow.
 
 1. Push the source code to GitHub.
@@ -299,7 +316,9 @@ This zip file contains the Windows portable version.
 
 ## Publish a GitHub Release
 
-After downloading the artifact from GitHub Actions, publish it as a Release so normal users can download it easily.
+This section is only needed if you want other users to download your built executable easily.
+
+After downloading the artifact from GitHub Actions, publish it as a Release.
 
 Recommended flow:
 
@@ -338,7 +357,9 @@ They do not need to download the source code.
 
 ## Local development
 
-For developers who want to run the source code directly:
+This section is only needed if you want to run or modify the source code directly.
+
+With Conda:
 
 ```bash
 conda env create -f environment.yml
@@ -346,7 +367,7 @@ conda activate cesal_bot
 python check_cesal_rooms.py
 ```
 
-Or with pip:
+With pip:
 
 ```bash
 python -m venv .venv
@@ -444,6 +465,59 @@ CESAL Room Monitor 是一个 Windows 绿色版 CESAL 房源监控工具。它会
 
 ---
 
+## 应该选择哪种使用方式？
+
+这个项目有两种使用方式。
+
+### 方式 A：我只是想直接使用软件
+
+请使用 Windows 绿色版 Release。
+
+你不需要安装 Python、Anaconda、pip，也不需要安装任何 Python 包。
+
+进入：
+
+```text
+Releases -> latest version -> Assets
+```
+
+下载：
+
+```text
+CESALRoomMonitor_v1.0.0.zip
+```
+
+解压后，阅读压缩包里的：
+
+```text
+README_FIRST_USE.txt
+```
+
+这个文件会说明如何配置 `config.txt`、如何获取 Telegram bot token、如何发送 `/start` 和 `test123`，以及如何运行 `CESALRoomMonitor.exe`。
+
+这是普通用户最推荐的方式。
+
+### 方式 B：我想自己构建或修改项目
+
+请使用本仓库里的源代码。
+
+这种方式适合开发者，或者适合想要做下面事情的用户：
+
+- 修改 Python 脚本；
+- 修改打包 workflow；
+- 用 GitHub Actions 构建新的 exe；
+- 发布新的 GitHub Release；
+- 直接用 Python 运行源码。
+
+如果你选择这种方式，请阅读后面的章节：
+
+- 仓库结构
+- 使用 GitHub Actions 构建 Windows exe
+- 发布 GitHub Release
+- 本地开发
+
+---
+
 ## 这个项目能做什么
 
 - 使用 Microsoft Edge 打开 CESAL resident 页面。
@@ -460,7 +534,7 @@ CESAL Room Monitor 是一个 Windows 绿色版 CESAL 房源监控工具。它会
 
 ---
 
-## 推荐使用方式：Windows 绿色版 Release
+## 直接使用：Windows 绿色版 Release
 
 普通用户推荐从 GitHub Releases 下载 Windows 绿色版。
 
@@ -506,9 +580,30 @@ CESALRoomMonitor_v1.0.0/
 └── state/
 ```
 
+### 先阅读压缩包说明
+
+Release 压缩包里包含：
+
+```text
+README_FIRST_USE.txt
+```
+
+这是打包 exe 的用户说明。运行前建议先阅读。
+
+简短流程是：
+
+1. 复制 `config.example.txt`。
+2. 把复制后的文件改名为 `config.txt`。
+3. 填写 `TELEGRAM_BOT_TOKEN`。
+4. 确认或修改 `CESAL_END_DATE`。
+5. 给 Telegram bot 发送 `/start` 和 `test123`。
+6. 双击 `CESALRoomMonitor.exe`。
+
 ---
 
-## 第一次配置
+## 第一次配置概要
+
+完整第一次使用说明在 Release 压缩包里的 `README_FIRST_USE.txt`。下面只是概要。
 
 ### 第一步：创建 `config.txt`
 
@@ -561,62 +656,42 @@ CHECK_INTERVAL_MINUTES_MAX=20
 
 ---
 
-## 如何获取 Telegram bot token
+## Telegram bot 设置概要
+
+完整 Telegram 配置说明在 Release 压缩包里的 `README_FIRST_USE.txt`。
 
 1. 打开 Telegram。
 2. 搜索 `@BotFather`。
-3. 打开和 BotFather 的聊天窗口。
-4. 发送：
+3. 发送：
 
 ```text
 /newbot
 ```
 
-5. 按提示操作。
-6. BotFather 会要求你设置机器人的显示名称和 username。
-7. 机器人的 username 必须以 `bot` 结尾，例如：
-
-```text
-cesal_room_alert_abc_bot
-```
-
-8. 创建成功后，BotFather 会给你一串 token，格式类似：
-
-```text
-123456789:AAxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-```
-
-9. 把这串 token 复制到 `config.txt`：
+4. 按提示操作。
+5. 复制 BotFather 返回的 token。
+6. 把 token 填入 `config.txt`：
 
 ```text
 TELEGRAM_BOT_TOKEN=123456789:AAxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
-重要：Telegram bot token 是私人信息。不要把 `config.txt` 上传到 GitHub，也不要分享你的真实 token。
-
----
-
-## 唤醒 Telegram 机器人
-
 运行程序前，打开你的 Telegram 机器人聊天窗口，发送：
 
 ```text
 /start
-```
-
-然后发送：
-
-```text
 test123
 ```
 
-这是必须的，因为 Telegram 机器人不能主动给从未和它对话过的用户发送消息。
+建议每天重新运行监控程序前，再发送一次 `test123`。
 
-建议每天重新运行监控程序前，再发送一次 `test123`。这样程序更容易自动发现你的最新 Telegram chat ID。
+重要：Telegram bot token 是私人信息。不要把 `config.txt` 上传到 GitHub，也不要分享你的真实 token。
 
 ---
 
-## 运行程序
+## 运行概要
+
+完整运行说明在 `README_FIRST_USE.txt`。
 
 在 `CESALRoomMonitor_v1.0.0` 文件夹中，双击：
 
@@ -624,50 +699,11 @@ test123
 CESALRoomMonitor.exe
 ```
 
-首先会打开一个黑色命令行窗口。程序初始化完成后，Microsoft Edge 会自动打开。
+第一次运行可能需要等待大约 30 秒到 1 分钟，Edge 浏览器才会弹出。
 
-### 第一次运行可能比较慢
+如果 CESAL 要求登录，请在自动打开的 Microsoft Edge 浏览器里手动登录。等 CESAL resident 页面正常显示后，回到黑色命令行窗口按 `Enter` 继续。
 
-第一次运行可能需要等待大约 30 秒到 1 分钟，Edge 浏览器才会弹出。请耐心等待，不要连续重复双击程序。
-
-如果不小心打开了多个程序窗口，请关闭多余窗口，只保留一个程序运行。
-
-### 手动登录 CESAL
-
-如果 CESAL 要求登录：
-
-1. 切换到自动打开的 Microsoft Edge 浏览器。
-2. 手动登录你的 CESAL resident account。
-3. 如果 Edge 询问是否保存密码，在你自己的可信电脑上可以选择保存或记住密码。
-4. 等到 CESAL resident homepage 或 resident area 完全显示出来。
-5. 回到黑色命令行窗口。
-6. 按 `Enter` 继续。
-
-### 程序怎么知道你已经登录成功
-
-程序不会读取你的密码，也不会自动提交账号密码。
-
-当程序检测到 CESAL 登录页面时，它会暂停并等待你手动登录。你在浏览器里登录成功后，需要回到黑色命令行窗口按 `Enter`，等于告诉程序“我已经登录完成”。然后程序会重新打开 reservation 页面。
-
-如果此时仍然停留在登录页面，程序会再次提示你手动登录。
-
-### 输入账号密码有时间限制吗
-
-程序本身在等待登录时没有很短的倒计时。正常情况下，你可以花几分钟输入账号、密码，以及完成 CESAL 网站要求的验证。
-
-但是 CESAL 网站自己可能有登录页面超时或 session 超时机制。如果网页超时了，就刷新或重新登录；等 resident 页面正常显示后，再回到命令行窗口按 `Enter`。
-
----
-
-## 如何停止
-
-在黑色命令行窗口中按：
-
-```text
-Ctrl + C
-```
-
-如果终端询问是否停止程序，确认即可。
+程序不会读取你的密码，也不会自动提交账号密码。它只会等待你手动完成登录。
 
 ---
 
@@ -703,6 +739,8 @@ CESALRoomMonitor_v1.0.0/
 
 ## 使用 GitHub Actions 构建 Windows exe
 
+这一节只在你想自己构建程序时需要阅读。
+
 本仓库已经包含 GitHub Actions workflow。
 
 1. 把源码 push 到 GitHub。
@@ -735,7 +773,9 @@ CESALRoomMonitor_v1.0.0.zip
 
 ## 发布 GitHub Release
 
-从 GitHub Actions 下载 artifact 后，建议发布到 Release，这样普通用户更容易下载。
+这一节只在你想让其他用户方便下载你的 exe 时需要阅读。
+
+从 GitHub Actions 下载 artifact 后，建议发布到 Release。
 
 推荐流程：
 
@@ -774,7 +814,9 @@ Releases -> latest version -> Assets -> CESALRoomMonitor_v1.0.0.zip
 
 ## 本地开发
 
-如果开发者想直接运行源码：
+这一节只在你想直接运行或修改源码时需要阅读。
+
+使用 Conda：
 
 ```bash
 conda env create -f environment.yml
@@ -782,7 +824,7 @@ conda activate cesal_bot
 python check_cesal_rooms.py
 ```
 
-或者使用 pip：
+使用 pip：
 
 ```bash
 python -m venv .venv
