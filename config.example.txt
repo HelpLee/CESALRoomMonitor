@@ -1,19 +1,133 @@
 # CESAL Room Monitor - simple configuration
-# 只需要改下面两项：租期结束日期 + Telegram Bot Token。
+# CESAL Room Monitor - 简单配置文件
+#
+# English:
+# Normally, you only need to change two fields:
+#   1. CESAL_END_DATE
+#   2. TELEGRAM_BOT_TOKEN
+#
+# 中文：
+# 通常只需要修改两项：
+#   1. CESAL_END_DATE
+#   2. TELEGRAM_BOT_TOKEN
 
-# 你希望查询的租期结束日期，格式必须是 日/月/年
+
+# ------------------------------------------------------------
+# 1. Lease end date / 租期结束日期
+# ------------------------------------------------------------
+#
+# English:
+# The lease end date you want to search for.
+# The required format is DD/MM/YYYY.
+#
+# 中文：
+# 你希望查询的租期结束日期。
+# 格式必须是 日/月/年。
+#
+# Example / 示例:
+# CESAL_END_DATE=19/06/2027
+
 CESAL_END_DATE=19/06/2027
 
-# Telegram BotFather 给你的 token，格式类似：123456789:AAxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+# ------------------------------------------------------------
+# 2. Telegram bot token / Telegram 机器人 token
+# ------------------------------------------------------------
+#
+# English:
+# Paste the token given by Telegram @BotFather.
+# The token format usually looks like:
+#
+#   123456789:AAxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+#
+# To get a token:
+#   1. Open Telegram.
+#   2. Search @BotFather.
+#   3. Send /newbot.
+#   4. Follow the instructions.
+#   5. Copy the token returned by BotFather.
+#
+# 中文：
+# 粘贴 Telegram @BotFather 给你的 token。
+# token 格式通常类似：
+#
+#   123456789:AAxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+#
+# 获取方法：
+#   1. 打开 Telegram。
+#   2. 搜索 @BotFather。
+#   3. 发送 /newbot。
+#   4. 按提示创建机器人。
+#   5. 复制 BotFather 返回的 token。
+#
+# Important / 重要：
+# Do not share your real token.
+# Do not upload config.txt to GitHub.
+# 不要分享真实 token。
+# 不要把 config.txt 上传到 GitHub。
+
 TELEGRAM_BOT_TOKEN=PASTE_YOUR_TELEGRAM_BOT_TOKEN_HERE
 
-# 检测间隔区间。程序会在 6 到 12 分钟之间随机选择下一次检查时间。
+
+# ------------------------------------------------------------
+# 3. Check interval range / 检测间隔区间
+# ------------------------------------------------------------
+#
+# English:
+# The program randomly waits between the minimum and maximum values
+# after each check.
+#
+# Default:
+#   6 to 12 minutes
+#
+# Example:
+#   CHECK_INTERVAL_MINUTES_MIN=10
+#   CHECK_INTERVAL_MINUTES_MAX=20
+#
+# 中文：
+# 每次检测结束后，程序会在最小值和最大值之间随机等待。
+#
+# 默认：
+#   6 到 12 分钟
+#
+# 示例：
+#   CHECK_INTERVAL_MINUTES_MIN=10
+#   CHECK_INTERVAL_MINUTES_MAX=20
+#
+# Recommendation / 建议：
+# Do not set it lower than 5 minutes.
 # 不建议低于 5 分钟，避免过于频繁访问网站。
+
 CHECK_INTERVAL_MINUTES_MIN=6
 CHECK_INTERVAL_MINUTES_MAX=12
 
-# 以下一般不用改：程序会自动发现 chat_id。
-# 使用前请先在 Telegram 里给机器人发送 /start，然后发送 test123。
+
+# ------------------------------------------------------------
+# 4. Telegram chat settings / Telegram 聊天设置
+# ------------------------------------------------------------
+#
+# English:
+# Usually, you do not need to change the following fields.
+# The program will try to discover your chat id automatically.
+#
+# Before running the program:
+#   1. Open your Telegram bot chat.
+#   2. Send /start.
+#   3. Send test123.
+#
+# It is recommended to send test123 again before running the monitor each day.
+#
+# 中文：
+# 下面这些一般不用改。
+# 程序会尝试自动发现你的 chat id。
+#
+# 运行程序之前：
+#   1. 打开你的 Telegram 机器人聊天窗口。
+#   2. 发送 /start。
+#   3. 发送 test123。
+#
+# 建议每天重新运行监控程序前，也发送一次 test123。
+
 TELEGRAM_CHAT_ID=
 TELEGRAM_AUTO_DISCOVER_CHAT_ID=true
 ENABLE_TELEGRAM=true
