@@ -45,22 +45,29 @@ Go to:
 Releases -> latest version -> Assets
 ```
 
-Download:
+Download the Windows portable zip file, for example:
 
 ```text
-CESALRoomMonitor_Windows_NoPython.zip
+CESALRoomMonitor_v1.0.0.zip
 ```
 
 Extract it to a local folder.
 
-After extraction, you should see files similar to:
+After extraction, the folder should be named:
 
 ```text
-CESALRoomMonitor.exe
-config.example.txt
-README_FIRST_USE.txt
-logs/
-state/
+CESALRoomMonitor_v1.0.0
+```
+
+Inside this folder, you should see files similar to:
+
+```text
+CESALRoomMonitor_v1.0.0/
+├── CESALRoomMonitor.exe
+├── config.example.txt
+├── README_FIRST_USE.txt
+├── logs/
+└── state/
 ```
 
 ---
@@ -69,7 +76,7 @@ state/
 
 ### Step 1: Create `config.txt`
 
-Copy:
+Inside the `CESALRoomMonitor_v1.0.0` folder, copy:
 
 ```text
 config.example.txt
@@ -175,7 +182,7 @@ It is recommended to send `test123` again before running the monitor each day. T
 
 ## Run the program
 
-Double-click:
+Inside the `CESALRoomMonitor_v1.0.0` folder, double-click:
 
 ```text
 CESALRoomMonitor.exe
@@ -245,6 +252,17 @@ CESALRoomMonitor/
 └── state/                          # Runtime notification state, local only
 ```
 
+The packaged Windows release folder is:
+
+```text
+CESALRoomMonitor_v1.0.0/
+├── CESALRoomMonitor.exe
+├── config.example.txt
+├── README_FIRST_USE.txt
+├── logs/
+└── state/
+```
+
 ---
 
 ## Build the Windows executable with GitHub Actions
@@ -267,13 +285,15 @@ Run workflow
 
 5. Wait until the workflow succeeds.
 6. Open the successful workflow run.
-7. Download the artifact:
+7. Download the artifact.
+
+The artifact should be published or renamed as:
 
 ```text
-CESALRoomMonitor_Windows_NoPython
+CESALRoomMonitor_v1.0.0.zip
 ```
 
-The artifact is a zip file containing the Windows portable version.
+This zip file contains the Windows portable version.
 
 ---
 
@@ -298,13 +318,18 @@ v1.0.0
 CESAL Room Monitor v1.0.0
 ```
 
-6. Upload the artifact zip as a release asset.
+6. Upload the Windows portable zip as a release asset:
+
+```text
+CESALRoomMonitor_v1.0.0.zip
+```
+
 7. Click `Publish release`.
 
 Normal users should download the program from:
 
 ```text
-Releases -> latest version -> Assets
+Releases -> latest version -> Assets -> CESALRoomMonitor_v1.0.0.zip
 ```
 
 They do not need to download the source code.
@@ -456,22 +481,29 @@ CESAL Room Monitor 是一个 Windows 绿色版 CESAL 房源监控工具。它会
 Releases -> latest version -> Assets
 ```
 
-下载：
+下载 Windows 绿色版压缩包，例如：
 
 ```text
-CESALRoomMonitor_Windows_NoPython.zip
+CESALRoomMonitor_v1.0.0.zip
 ```
 
 解压到本地文件夹。
 
-解压后应该能看到类似这些文件：
+解压后的文件夹名称应为：
 
 ```text
-CESALRoomMonitor.exe
-config.example.txt
-README_FIRST_USE.txt
-logs/
-state/
+CESALRoomMonitor_v1.0.0
+```
+
+文件夹内部应类似：
+
+```text
+CESALRoomMonitor_v1.0.0/
+├── CESALRoomMonitor.exe
+├── config.example.txt
+├── README_FIRST_USE.txt
+├── logs/
+└── state/
 ```
 
 ---
@@ -480,7 +512,7 @@ state/
 
 ### 第一步：创建 `config.txt`
 
-复制：
+在 `CESALRoomMonitor_v1.0.0` 文件夹中，复制：
 
 ```text
 config.example.txt
@@ -586,7 +618,7 @@ test123
 
 ## 运行程序
 
-双击：
+在 `CESALRoomMonitor_v1.0.0` 文件夹中，双击：
 
 ```text
 CESALRoomMonitor.exe
@@ -656,6 +688,17 @@ CESALRoomMonitor/
 └── state/                          # 本地通知状态
 ```
 
+打包后的 Windows 绿色版文件夹是：
+
+```text
+CESALRoomMonitor_v1.0.0/
+├── CESALRoomMonitor.exe
+├── config.example.txt
+├── README_FIRST_USE.txt
+├── logs/
+└── state/
+```
+
 ---
 
 ## 使用 GitHub Actions 构建 Windows exe
@@ -678,13 +721,15 @@ Run workflow
 
 5. 等待 workflow 成功。
 6. 打开成功的 workflow run。
-7. 下载 artifact：
+7. 下载 artifact。
+
+该 artifact 建议发布或重命名为：
 
 ```text
-CESALRoomMonitor_Windows_NoPython
+CESALRoomMonitor_v1.0.0.zip
 ```
 
-该 artifact 是包含 Windows 绿色版的 zip 文件。
+这个 zip 文件包含 Windows 绿色版。
 
 ---
 
@@ -709,13 +754,18 @@ v1.0.0
 CESAL Room Monitor v1.0.0
 ```
 
-6. 上传 artifact zip 作为 release asset。
+6. 上传 Windows 绿色版 zip 作为 release asset：
+
+```text
+CESALRoomMonitor_v1.0.0.zip
+```
+
 7. 点击 `Publish release`。
 
 普通用户应该从下面位置下载软件：
 
 ```text
-Releases -> latest version -> Assets
+Releases -> latest version -> Assets -> CESALRoomMonitor_v1.0.0.zip
 ```
 
 不需要下载源码。
