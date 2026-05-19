@@ -25,8 +25,26 @@ jobs:
           pip install pyinstaller
 
       - name: Build exe with PyInstaller
+        shell: pwsh
         run: |
-          pyinstaller --noconfirm --clean --onefile --name CESALRoomMonitor check_cesal_rooms.py
+          pyinstaller `
+            --noconfirm `
+            --clean `
+            --onefile `
+            --name CESALRoomMonitor `
+            --collect-all selenium `
+            --hidden-import selenium `
+            --hidden-import selenium.webdriver `
+            --hidden-import selenium.webdriver.edge `
+            --hidden-import selenium.webdriver.edge.webdriver `
+            --hidden-import selenium.webdriver.edge.options `
+            --hidden-import selenium.webdriver.edge.service `
+            --hidden-import selenium.webdriver.common.by `
+            --hidden-import selenium.webdriver.support.ui `
+            --hidden-import selenium.webdriver.support.expected_conditions `
+            --hidden-import selenium.common.exceptions `
+            --hidden-import requests `
+            check_cesal_rooms.py
 
       - name: Prepare portable release folder
         shell: pwsh
@@ -34,11 +52,19 @@ jobs:
           New-Item -ItemType Directory -Force release/CESALRoomMonitor_Windows_NoPython | Out-Null
           New-Item -ItemType Directory -Force release/CESALRoomMonitor_Windows_NoPython/logs | Out-Null
           New-Item -ItemType Directory -Force release/CESALRoomMonitor_Windows_NoPython/state | Out-Null
+
           Copy-Item dist/CESALRoomMonitor.exe release/CESALRoomMonitor_Windows_NoPython/
           Copy-Item config.example.txt release/CESALRoomMonitor_Windows_NoPython/
           Copy-Item README_FIRST_USE.txt release/CESALRoomMonitor_Windows_NoPython/
-          Copy-Item LICENSE release/CESALRoomMonitor_Windows_NoPython/ -ErrorAction SilentlyContinue
-          Compress-Archive -Path release/CESALRoomMonitor_Windows_NoPython/* -DestinationPath release/CESALRoomMonitor_Windows_NoPython.zip -Force
+
+          if (Test-Path LICENSE) {
+            Copy-Item LICENSE release/CESALRoomMonitor_Windows_NoPython/
+          }
+
+          Compress-Archive `
+            -Path release/CESALRoomMonitor_Windows_NoPython/* `
+            -DestinationPath release/CESALRoomMonitor_Windows_NoPython.zip `
+            -Force
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
